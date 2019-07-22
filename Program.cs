@@ -19,9 +19,9 @@ namespace DigitalCouponApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((webHostBuilderContext, configurationBuilder) => {
+            .ConfigureAppConfiguration((webHostBuilderContext, configurationBuilder) =>
+            {
                 configurationBuilder.AddJsonFile("appSettings.json");
-            })
-                .UseStartup<Startup>();
+            }).UseStartup<Startup>();
     }
 }

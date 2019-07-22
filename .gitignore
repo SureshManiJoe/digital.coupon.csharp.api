@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.dll
+*.pdb
+*.cache
+/obj/Release/netcoreapp2.2
+/obj
+/bin
+*.ide
+/.vs/DigitalCouponApi

@@ -39,17 +39,23 @@ namespace DigitalCouponApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            loggerFactory.AddLog4Net(Configuration.GetValue<string>("Log4NetConfigFile:Name"));
             app.UseCors(options =>
             {
                 options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials();
             });
             app.UseMvc();
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<CouponDbContext>();
+                context.Database.Migrate();
+            }
         }
     }
 }

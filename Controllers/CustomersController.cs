@@ -26,7 +26,7 @@ namespace DigitalCouponApi.Controllers
             var customers = await CustomerRepository.GetAll();
             if (customers == null)
                 return new List<CustomerModel>();
-            return customers.Select(c =>  c.ToModel());
+            return customers.Select(c => c.ToModel());
         }
 
         [HttpGet("{id}")]
